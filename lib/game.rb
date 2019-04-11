@@ -8,18 +8,14 @@ class Game
   end
 
   def start
-    order = ""
     i = 0
-    while i < 5 
-      puts "Player 1 place your ship"
-      order = STDIN.gets.chomp
-      order == "show boards" ? break : place(1, order)
-      puts "Player 2 place your ship"
-      order = STDIN.gets.chomp
-      order == "show boards" ? break : place(2, order)
-      i += 1
+    while i < 5
+      turn(1)
+      @order == "show boards" ? break : place(1, @order)
+      turn(2)
+      @order == "show boards" ? break : place(2, @order)
     end
-    showboards()
+    showboards() if @order == "show boards"
   end
 
   def place(player, order)
@@ -28,5 +24,24 @@ class Game
 
   def showboards
     Display.boards(@player1board.sea, @player2board.sea)
+  end
+
+  def getorder(player)
+    puts "Player #{player} place your ship"
+    @order = STDIN.gets.chomp
+  end
+
+  def illegal?
+    if @order.split("").any?(("K".."Z"))
+      puts "Shows the board is empty at the start"
+      getorder(1)
+    end
+  end
+
+  def turn(num)
+    puts "Player #{num} place your ship"
+    getorder(num)
+    illegal?
+
   end
 end
