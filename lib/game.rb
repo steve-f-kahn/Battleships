@@ -29,11 +29,12 @@ class Game
   def getorder(player)
     puts "Player #{player} place your ship"
     @order = STDIN.gets.chomp
+    illegal?
   end
 
   def illegal?
-    if @order.split("").any?(("K".."Z"))
-      puts "Shows the board is empty at the start"
+    if @order.split("").any?(("K".."Z")) ||  @order.slice(1..2).to_i > 10 || @order.slice(5..6).to_i > 10
+      puts "Ship out of bounds place again"
       getorder(1)
     end
   end
@@ -41,7 +42,5 @@ class Game
   def turn(num)
     puts "Player #{num} place your ship"
     getorder(num)
-    illegal?
-
   end
 end

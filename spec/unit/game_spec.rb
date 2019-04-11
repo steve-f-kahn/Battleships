@@ -29,7 +29,7 @@ describe Game do
            ["o","o","o","o","o","o","o","o","o","o"],
            ["o","o","o","o","o","o","o","o","o","o"]]
     game = Game.new
-    game.place(1,"C3-C5")
+    game.place(1,"C03-C05")
     expect(game.player1board.sea).to eq(sea)
   end
 end
