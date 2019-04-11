@@ -8,10 +8,11 @@ class Display
 
   def format(board)
     i = 0
-    board.sea.each do |row|
-       board.sea[i] = row.join(",")
+    board.each do |row|
+      p row
+       board[i] = row.join(" ")
        i += 1
     end
-    board.sea.join("\n")
+    board.join("\n")
   end
 end

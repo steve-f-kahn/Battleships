@@ -6,6 +6,7 @@ describe "Can see the board" do
     sea = []
     10.times { sea.push("o,o,o,o,o,o,o,o,o,o\n") }
     sea.join("")
-    expect{game.showboards}.to output(/#{sea}/).to_stdout
+    allow(STDIN).to receive(:gets).and_return("show boards")
+    expect{game.start}.to output(/#{sea}/).to_stdout
   end
 end
