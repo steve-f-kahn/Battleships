@@ -42,4 +42,18 @@ describe "Setup a game and place ships" do
     error = "Ship out of bounds place again"
     expect{ game.start }.to output(/#{error}/).to_stdout
   end
+
+  it "Trys to place a ship ontop of another ship and gets an error" do
+    allow(STDIN).to receive(:gets).and_return("A01-A04", "A05-A09", "A01-A04", "show boards")
+    game = Game.new
+    error = "Ship overlaps with another ship"
+    expect{ game.start }.to output(/#{error}/).to_stdout
+  end
+
+  it "Trys to place a ship ontop of another ship and gets an error and can place a correct ship after" do
+    allow(STDIN).to receive(:gets).and_return("A01-A04", "A05-A09", "A01-A04", "show boards")
+    game = Game.new
+    message = "Player 1 place your ship"
+    expect{ game.start }.to output(/#{message}/).to_stdout
+  end
 end

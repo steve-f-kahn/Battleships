@@ -27,7 +27,7 @@ describe Board do
            ["o","o","o","o","o","o","o","o","o","o"],
            ["o","o","o","o","o","o","o","o","o","o"]]
     board = Board.new
-    board.place("C4-D4")
+    board.place("C04-D04")
     expect(board.sea).to eq sea
   end
 end

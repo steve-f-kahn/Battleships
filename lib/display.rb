@@ -9,7 +9,6 @@ class Display
   def format(board)
     i = 0
     board.each do |row|
-      p row
        board[i] = row.join(" ")
        i += 1
     end

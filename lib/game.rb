@@ -10,12 +10,10 @@ class Game
   def start
     i = 0
     while i < 5
-      turn(1)
-      @order == "show boards" ? break : place(1, @order)
-      turn(2)
-      @order == "show boards" ? break : place(2, @order)
+      break if turn(1).nil?
+      break if turn(2).nil?
     end
-    showboards() if @order == "show boards"
+    showboards()
   end
 
   def place(player, order)
@@ -35,12 +33,19 @@ class Game
   def illegal?
     if @order.split("").any?(("K".."Z")) ||  @order.slice(1..2).to_i > 10 || @order.slice(5..6).to_i > 10
       puts "Ship out of bounds place again"
-      getorder(1)
+      getorder(@go)
     end
   end
 
   def turn(num)
-    puts "Player #{num} place your ship"
+    @go = num
+    p "2nd go" if @go == 2
     getorder(num)
+    return nil if @order == "show boards"
+    if place(num, @order).nil?
+      puts "Ship overlaps with another ship"
+      turn(@go)
+    end
+    return "something"
   end
 end
