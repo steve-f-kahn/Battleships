@@ -5,10 +5,13 @@
 As a player
 So that I can prepare for the game
 I would like to place a ship in a board location
-
+```
+Player, Board, Ship
+```
 As a player
 So that I can play a more interesting game
 I would like to have a range of ship sizes to choose from
+```
 
 As a player
 So the game is more fun to play
