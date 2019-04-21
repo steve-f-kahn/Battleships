@@ -1,5 +1,9 @@
 # Battleships
 
+## Introduction
+
+A CLI remake of the classic board game Battleships, developed in ruby and fully test driven.
+
 ## User Stories
 ```
 As a player
