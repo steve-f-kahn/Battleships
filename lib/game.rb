@@ -5,15 +5,27 @@ class Game
   def initialize
     @player1board = Board.new
     @player2board = Board.new
+    @gameover = false
+  end
+
+  def setup
+    i = 0
+    while i < 5
+      @attempt = 0
+      break if placement_turn(1).nil?
+      break if placement_turn(2).nil?
+      i += 1
+    end
+     showboards() if @order == "show boards"
+     start() if STDIN.gets.chomp == "Y"
   end
 
   def start
-    i = 0
-    while i < 5
-      break if turn(1).nil?
-      break if turn(2).nil?
+    while @gameover == false
+      puts "Player 1 fire at will!"
+      fire(1)
+      break
     end
-    showboards()
   end
 
   def place(player, order)
@@ -37,15 +49,21 @@ class Game
     end
   end
 
-  def turn(num)
+  def placement_turn(num)
     @go = num
-    p "2nd go" if @go == 2
     getorder(num)
     return nil if @order == "show boards"
     if place(num, @order).nil?
       puts "Ship overlaps with another ship"
-      turn(@go)
+      @attempt += 1
+      return nil if @attempt > 10
+      placement_turn(@go)
     end
-    return "something"
+    "something"
+  end
+
+  def fire(num)
+    order = STDIN.gets.chomp
+    num == 1 ? @player1board.fire(order) : @player1board.fire(order)
   end
 end

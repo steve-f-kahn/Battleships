@@ -1,6 +1,5 @@
 class Board
   CORDS = ("A"..."J").to_a
-  attr_reader :sea
   def initialize
     @sea = [["o","o","o","o","o","o","o","o","o","o"]]
     9.times {@sea << ["o","o","o","o","o","o","o","o","o","o"]}
@@ -21,6 +20,22 @@ class Board
       end
       i -= 1
     end
+    @sea
+  end
+
+  def fire(cord)
+    case @sea[CORDS.index(cord[0])][cord.slice(1..2).to_i]
+    when "X"
+      @sea[CORDS.index(cord[0])][cord.slice(1..2).to_i] = "S"
+      puts "Hit!"
+    when "S"
+      puts "Already Hit!"
+    when "o"
+      puts "Miss!"
+    end
+  end
+
+  def sea
     @sea
   end
 
